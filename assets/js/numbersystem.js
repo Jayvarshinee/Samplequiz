@@ -19,7 +19,6 @@ intervalhandler = setInterval(updatetimer,1000);
 const submit_btn = document.getElementById("submit-btn");
 const question_p = document.getElementById("question");
 const choices_div = document.getElementById("choices"); 
-const next_btn = document.getElementById("next-btn");
 
 //Score 
 
@@ -48,6 +47,12 @@ function guess(id,choices,i){
         if(value){
             score++;
         }
+        questionIndex++;
+        if(questionIndex === questions.length-1){
+            submit_btn.classList.remove("hide");
+        }
+        showQuestion(questionIndex);
+        showChoices(questionIndex);
     }    
 }
 function showQuestion(i){
@@ -65,24 +70,11 @@ function showChoices(i){
         guess("btn"+j,c[j],i);
     }
 }
-
-next_btn.addEventListener("click",function(){
-   
-    questionIndex++;
-    if(questionIndex === questions.length-1){
-        next_btn.classList.add("hide");
-        submit_btn.classList.remove("hide");
-    }
-    showQuestion(questionIndex);
-    showChoices(questionIndex);
-});
-
 submit_btn.addEventListener('click',function(){
     question_p.style.fontSize= "30px";
     question_p.style.fontWeight= "700";
     question_p.innerHTML = 'Your Score : ' + score + '<br>Total Questions : '+questions.length + '<br>Total Questions attended : '+`${questionIndex+1}`;
     choices_div.classList.add("hide");
-    next_btn.classList.add("hide");
     submit_btn.classList.add("hide");
     clearInterval(intervalhandler);
     document.getElementById("time-txt").innerHTML = "Time Taken : ";
