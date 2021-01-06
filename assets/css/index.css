@@ -109,3 +109,11 @@
 .hide{
     display: none;
 }
+.btn-correct{
+    background-color: greenyellow;
+}
+.btn-wrong{
+    background-color: red;
+}
+
+
