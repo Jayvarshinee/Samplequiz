@@ -15,8 +15,8 @@ function updatetimer(){
 
 intervalhandler = setInterval(updatetimer,1000);
 
-//Stop timer when submit clicked and display result
 const submit_btn = document.getElementById("submit-btn");
+const next_btn = document.getElementById("next-btn");
 const question_p = document.getElementById("question");
 const choices_div = document.getElementById("choices"); 
 
@@ -46,13 +46,17 @@ function guess(id,choices,i){
         let value = isCorrectAnswer(choices,i);
         if(value){
             score++;
+            btn.classList.add('btn-correct');
+            setTimeout(function(){
+                btn.classList.remove("btn-correct");
+            },500);
         }
-        questionIndex++;
-        if(questionIndex === questions.length-1){
-            submit_btn.classList.remove("hide");
+        else{
+            btn.classList.add("btn-wrong");
+            setTimeout(function(){
+                btn.classList.remove("btn-wrong");
+            },500);
         }
-        showQuestion(questionIndex);
-        showChoices(questionIndex);
     }    
 }
 function showQuestion(i){
@@ -70,12 +74,24 @@ function showChoices(i){
         guess("btn"+j,c[j],i);
     }
 }
+
+next_btn.addEventListener('click',function(){
+    questionIndex++;
+    if(questionIndex === questions.length-1){
+        submit_btn.classList.remove("hide");
+        next_btn.classList.add("hide");
+    }
+    showQuestion(questionIndex);
+    showChoices(questionIndex);
+})
+
 submit_btn.addEventListener('click',function(){
     question_p.style.fontSize= "30px";
     question_p.style.fontWeight= "700";
-    question_p.innerHTML = 'Your Score : ' + score + '<br>Total Questions : '+questions.length + '<br>Total Questions attended : '+`${questionIndex+1}`;
+    question_p.innerHTML = 'Your Score : ' + score + '<br>Total Questions : '+questions.length ;
     choices_div.classList.add("hide");
     submit_btn.classList.add("hide");
+    next_btn.classList.add("hide");
     clearInterval(intervalhandler);
     document.getElementById("time-txt").innerHTML = "Time Taken : ";
 })
