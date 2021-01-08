@@ -19,6 +19,7 @@ const submit_btn = document.getElementById("submit-btn");
 const next_btn = document.getElementById("next-btn");
 const question_p = document.getElementById("question");
 const choices_div = document.getElementById("choices"); 
+const msg_div = document.getElementById("message");
 
 //Score 
 
@@ -39,25 +40,32 @@ function isCorrectAnswer(choices,i){
     return questions[i].answer === choices;
 }
 
+
 function guess(id,choices,i){
     let btn = document.getElementById(id);
-    
     btn.onclick = function(){
         let value = isCorrectAnswer(choices,i);
         if(value){
             score++;
+            
             btn.classList.add('btn-correct');
             setTimeout(function(){
                 btn.classList.remove("btn-correct");
-            },500);
+            },700);
+            msg_div.classList.remove("hide");
+            msg_div.classList.add("result");
+            msg_div.innerHTML = 'Correct Answer!!!';
         }
         else{
             btn.classList.add("btn-wrong");
             setTimeout(function(){
                 btn.classList.remove("btn-wrong");
-            },500);
+            },700);
+            msg_div.classList.remove("hide");
+            msg_div.classList.add("result");
+            msg_div.innerHTML = 'OOPS!! Wrong Answer<br>Correct Answer is '+questions[i].answer;
         }
-    }    
+    }
 }
 function showQuestion(i){
     let q = questions[i];
@@ -81,6 +89,7 @@ next_btn.addEventListener('click',function(){
         submit_btn.classList.remove("hide");
         next_btn.classList.add("hide");
     }
+    msg_div.classList.add("hide");
     showQuestion(questionIndex);
     showChoices(questionIndex);
 })
@@ -90,6 +99,7 @@ submit_btn.addEventListener('click',function(){
     question_p.style.fontWeight= "700";
     question_p.innerHTML = 'Your Score : ' + score + '<br>Total Questions : '+questions.length ;
     choices_div.classList.add("hide");
+    msg_div.classList.add("hide");
     submit_btn.classList.add("hide");
     next_btn.classList.add("hide");
     clearInterval(intervalhandler);
