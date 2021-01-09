@@ -45,6 +45,7 @@ function guess(id,choices,i){
     let btn = document.getElementById(id);
     btn.onclick = function(){
         let value = isCorrectAnswer(choices,i);
+        choices_div.classList.add("disabled");
         if(value){
             score++;
             
@@ -75,7 +76,8 @@ function showQuestion(i){
 
 function showChoices(i){
     let c = questions[i].choices;
-    choices_div.classList.add("btn-grid")
+    choices_div.classList.add("btn-grid");
+    choices_div.classList.remove("disabled");
     for(let j=0;j<c.length;j++){
         let btn = document.getElementById("btn"+j);
         btn.innerHTML = c[j];
