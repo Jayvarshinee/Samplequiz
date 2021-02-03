@@ -31,7 +31,7 @@ function Question(text, choices, answer) {
     this.answer = answer;
 }
 var questions = [
-    new Question("When a number is subtracted from the number 8,12 and 20 the remainders are in continued proportion Find the number ?", ["2", "4","6", "8"], "4"),
+    new Question("When a number is subtracted from the number 8,12 and 20 the remainders are in continued proportion Find the number ?", "2", "4","6", "8", "4"),
     new Question("The sum of the digits of a 2-digit number is 11. If we add 45 to the number the new number obtained is a number formed by interchange of the digits. What is the number?", ["x=3 and y=8","x=5 and y=8","x=8 and y=3","x=4 and y=8"], "x=3 and y=8"),
     new Question("Among three numbers, the first is twice the second and thrice the third if the average of three numbers is 517 then what is the difference between the first and the third number?", ["764","364","564","664"],"564")
 ];
